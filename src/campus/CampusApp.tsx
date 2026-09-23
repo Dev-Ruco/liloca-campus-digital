@@ -15,6 +15,7 @@ import {
   Globe2,
   GraduationCap,
   Menu,
+  Monitor,
   Play,
   Search,
   ShieldCheck,
@@ -108,10 +109,13 @@ function Home() {
         <section className="lcd-hero lcd-hero-brand" id="inicio">
           <div className="lcd-container lcd-hero-grid lcd-hero-grid-brand">
             <div className="lcd-hero-copy lcd-hero-copy-brand">
-              <span className="lcd-hero-eyebrow">Liloca Campus Digital</span>
+              <div className="lcd-hero-eyebrow-row">
+                <span className="lcd-hero-eyebrow">Liloca Campus Digital</span>
+                <i aria-hidden="true" />
+              </div>
 
               <h1>
-                Aprenda com universidades e <span>instituições reconhecidas</span>
+                Aprenda com <span>universidades e instituições reconhecidas</span>
               </h1>
 
               <p className="lcd-hero-lead lcd-hero-lead-brand">
@@ -130,32 +134,33 @@ function Home() {
 
               <div className="lcd-hero-meta">
                 <div>
-                  <GraduationCap size={23} />
-                  <span><strong>Formação prática</strong><small>Cursos de curta duração</small></span>
+                  <GraduationCap size={24} />
+                  <strong>Formação prática</strong>
                 </div>
                 <div>
-                  <Globe2 size={23} />
-                  <span><strong>100% online</strong><small>Estude onde estiver</small></span>
+                  <Monitor size={24} />
+                  <strong>100% online</strong>
                 </div>
                 <div>
-                  <ShieldCheck size={23} />
-                  <span><strong>Certificação</strong><small>Conforme o parceiro</small></span>
+                  <ShieldCheck size={24} />
+                  <strong>Certificação conforme o parceiro</strong>
                 </div>
+              </div>
+
+              <div className="lcd-hero-limit-note" aria-hidden="true">
+                <span>Conhecimento</span>
+                <span>sem limites</span>
+                <i />
               </div>
             </div>
 
-            <div className="lcd-hero-portrait-wrap">
+            <div className="lcd-hero-portrait-wrap" aria-label="Liloca Campus Digital">
               <div className="lcd-hero-portrait-card">
                 <img
                   className="lcd-hero-portrait"
                   src={heroVisual}
                   alt="Liloca"
                 />
-
-                <div className="lcd-hero-quote">
-                  <strong>Liloca</strong>
-                  <p>“Educação transforma realidades.”</p>
-                </div>
               </div>
             </div>
           </div>
