@@ -938,80 +938,80 @@ button { cursor: pointer; }
   }
 }
 
-
-/* LILOCA CAMPUS DIGITAL — HERO v3 APPROVED */
-.lcd-study-cta {
-  display: inline-flex;
-}
-
+/* HERO FINAL — REFERÊNCIA APROVADA */
 .lcd-hero-brand {
   position: relative;
-  padding: 0 0 54px;
   overflow: hidden;
+  padding: 0;
   background:
-    radial-gradient(circle at 86% 10%, rgba(18, 185, 210, .12), transparent 28%),
-    linear-gradient(180deg, #f8fbfe 0%, #ffffff 100%);
+    radial-gradient(circle at 14% 18%, rgba(224, 241, 250, .42), transparent 28%),
+    linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
 }
 
-.lcd-hero-grid-brand {
+.lcd-container.lcd-hero-grid-brand {
+  width: 100%;
+  max-width: none;
+  margin: 0;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 0;
   align-items: stretch;
-  padding-top: 0;
 }
 
 .lcd-hero-copy-brand {
   order: 2;
   position: relative;
-  z-index: 8;
-  margin-top: -20px;
-  padding: 28px 0 4px;
+  z-index: 3;
+  padding: 30px 22px 48px;
   background: #fff;
-  border-radius: 30px 30px 0 0;
+}
+
+.lcd-hero-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .lcd-hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 0;
-  color: #138bc5;
+  color: #1398d3;
   font-size: 11px;
   line-height: 1;
   font-weight: 800;
-  letter-spacing: .18em;
+  letter-spacing: .22em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.lcd-hero-eyebrow::after {
-  content: "";
-  width: 66px;
+.lcd-hero-eyebrow-row > i {
+  display: block;
+  width: 72px;
   height: 3px;
+  flex: none;
   border-radius: 999px;
-  background: #16b9c8;
+  background: #17b9c9;
 }
 
 .lcd-hero-copy-brand h1 {
-  max-width: 760px;
-  margin: 19px 0 17px;
-  color: #092f70;
-  font-size: clamp(38px, 9.6vw, 70px);
-  line-height: .98;
+  max-width: 790px;
+  margin: 20px 0 18px;
+  color: #0a2f78;
+  font-size: clamp(38px, 9.5vw, 72px);
+  line-height: .97;
   letter-spacing: -.055em;
   font-weight: 850;
 }
 
 .lcd-hero-copy-brand h1 span {
-  background: linear-gradient(90deg, #0a4ca4 0%, #0c75c2 48%, #12b8c5 100%);
+  background: linear-gradient(90deg, #0b4297 0%, #0b72c0 58%, #14b8c6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .lcd-hero-lead-brand {
-  max-width: 650px;
+  max-width: 620px;
   margin: 0;
-  color: #50647d;
+  color: #4f6279;
   font-size: 17px;
   line-height: 1.58;
 }
@@ -1019,14 +1019,14 @@ button { cursor: pointer; }
 .lcd-hero-actions-brand {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 11px;
-  margin-top: 25px;
+  gap: 12px;
+  margin-top: 27px;
 }
 
 .lcd-hero-actions-brand .lcd-large {
-  min-height: 54px;
   width: 100%;
-  border-radius: 15px;
+  min-height: 56px;
+  border-radius: 16px;
 }
 
 .lcd-hero-meta {
@@ -1035,250 +1035,125 @@ button { cursor: pointer; }
   gap: 0;
   margin-top: 27px;
   padding-top: 20px;
-  border-top: 1px solid #dfe8f1;
+  border-top: 1px solid #dce6ef;
 }
 
 .lcd-hero-meta > div {
   min-width: 0;
-  min-height: 96px;
-  padding: 0 10px;
+  min-height: 86px;
+  padding: 0 9px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   gap: 8px;
   text-align: center;
-  color: #0b4a9a;
+  color: #0b4694;
 }
 
 .lcd-hero-meta > div:not(:last-child) {
-  border-right: 1px solid #dce6ef;
+  border-right: 1px solid #d9e4ed;
 }
 
 .lcd-hero-meta svg {
   flex: none;
-  color: #0b4a9a;
-}
-
-.lcd-hero-meta span,
-.lcd-hero-meta strong,
-.lcd-hero-meta small {
-  display: block;
+  color: #0b4694;
 }
 
 .lcd-hero-meta strong {
-  color: #163a71;
-  font-size: 11px;
-  line-height: 1.25;
+  color: #183d76;
+  font-size: 10.5px;
+  line-height: 1.28;
 }
 
-.lcd-hero-meta small {
-  margin-top: 3px;
-  color: #7d8da0;
-  font-size: 9px;
-  line-height: 1.3;
-  font-weight: 500;
+.lcd-hero-limit-note {
+  display: none;
 }
 
 .lcd-hero-portrait-wrap {
   order: 1;
-  margin: 0 -16px;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .lcd-hero-portrait-card {
   position: relative;
-  min-height: 470px;
+  width: 100%;
+  min-height: 450px;
+  height: 100%;
   overflow: hidden;
-  isolation: isolate;
-  border-radius: 0 0 28px 28px;
-  background:
-    radial-gradient(circle at 34% 14%, rgba(255,255,255,.98), rgba(237,247,252,.94) 47%, transparent 48%),
-    linear-gradient(135deg, #eef8fc 0%, #dff3fb 48%, #cceaf7 100%);
+  border-radius: 0;
+  background: #edf7fc;
+  box-shadow: none;
 }
 
 .lcd-hero-portrait-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0) 62%, rgba(255,255,255,.10) 100%);
+  content: none;
 }
 
 .lcd-hero-portrait {
   position: absolute;
-  z-index: 3;
-  right: -5%;
-  bottom: 0;
-  width: 87%;
-  height: 96%;
-  object-fit: cover;
-  object-position: 54% 12%;
-  border-radius: 0;
-}
-
-.lcd-hero-shape {
-  position: absolute;
-  pointer-events: none;
+  inset: 0;
   z-index: 1;
-}
-
-.lcd-hero-shape-one {
-  width: 420px;
-  height: 520px;
-  right: -220px;
-  top: 28px;
-  border-radius: 52% 0 0 52%;
-  transform: rotate(12deg);
-  background: linear-gradient(155deg, #0e47b4 0%, #0a71d1 53%, #18b9cc 100%);
-}
-
-.lcd-hero-shape-two {
-  width: 340px;
-  height: 340px;
-  right: -20px;
-  top: 80px;
-  border-radius: 50%;
-  background: rgba(89, 210, 226, .34);
-}
-
-.lcd-hero-shape-three {
-  width: 420px;
-  height: 420px;
-  left: -230px;
-  bottom: -270px;
-  border-radius: 50%;
-  background: rgba(188, 229, 247, .64);
-}
-
-.lcd-hero-quote {
-  position: absolute;
-  z-index: 7;
-  left: 22px;
-  top: 60px;
-  right: auto;
-  width: 178px;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  backdrop-filter: none;
-  box-shadow: none;
-}
-
-.lcd-hero-quote strong {
   display: block;
-  margin: 0 0 12px;
-  color: #0a347d;
-  font-size: 28px;
-  line-height: 1;
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: -.04em;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: right center;
+  border-radius: 0;
 }
 
-.lcd-hero-quote p {
-  margin: 0;
-  color: #52647b;
-  font-size: 14px;
-  line-height: 1.38;
-  font-weight: 650;
+.lcd-hero-quote,
+.lcd-hero-opportunity,
+.lcd-hero-shape {
+  display: none !important;
 }
 
-.lcd-hero-opportunity {
-  position: absolute;
-  z-index: 7;
-  left: 22px;
-  bottom: 54px;
-  display: grid;
-  gap: 3px;
-  color: #537bb8;
-  font-size: 10px;
-  font-weight: 650;
-  letter-spacing: .22em;
-  line-height: 1.45;
-  text-transform: uppercase;
-}
-
-.lcd-hero-opportunity::after {
-  content: "";
-  width: 58px;
-  height: 3px;
-  margin-top: 10px;
-  border-radius: 999px;
-  background: #16b8c8;
-}
-
-/* Mobile header: mantém apenas Área de estudo + menu ao lado do logótipo */
 @media (max-width: 899px) {
-  .lcd-header-inner {
-    gap: 8px;
+  .lcd-hero-brand {
+    padding-top: 0;
   }
 
-  .lcd-desktop-nav,
-  .lcd-link-button.lcd-hide-mobile {
-    display: none !important;
+  .lcd-container.lcd-hero-grid-brand {
+    width: 100%;
   }
 
-  .lcd-study-cta {
-    min-height: 40px;
-    padding: 0 13px;
-    border-radius: 11px;
-    font-size: 12px;
-    white-space: nowrap;
+  .lcd-hero-portrait-card {
+    min-height: min(69vw, 520px);
   }
 
-  .lcd-menu-button {
-    flex: none;
-  }
-
-  .lcd-hero-grid-brand {
-    width: min(100%, 760px);
+  .lcd-hero-portrait {
+    object-position: 78% center;
   }
 
   .lcd-hero-copy-brand {
-    padding-inline: 0;
+    margin-top: -14px;
+    border-radius: 28px 28px 0 0;
+  }
+
+  .lcd-study-cta {
+    display: inline-flex;
+    min-height: 40px;
+    padding: 0 11px;
+    border-radius: 11px;
+    white-space: nowrap;
+    font-size: 11px;
   }
 }
 
 @media (max-width: 520px) {
-  .lcd-container.lcd-hero-grid-brand {
-    width: calc(100% - 24px);
-  }
-
-  .lcd-hero-portrait-wrap {
-    margin: 0 -12px;
-  }
-
   .lcd-hero-portrait-card {
     min-height: 430px;
   }
 
   .lcd-hero-portrait {
-    width: 91%;
-    height: 95%;
-    right: -13%;
-    object-position: 52% 10%;
+    object-position: 79% center;
   }
 
-  .lcd-hero-quote {
-    left: 18px;
-    top: 54px;
-    width: 145px;
-  }
-
-  .lcd-hero-quote strong {
-    font-size: 24px;
-  }
-
-  .lcd-hero-quote p {
-    font-size: 12px;
-  }
-
-  .lcd-hero-opportunity {
-    left: 18px;
-    bottom: 48px;
-    font-size: 9px;
+  .lcd-hero-copy-brand {
+    padding: 25px 20px 42px;
   }
 
   .lcd-hero-copy-brand h1 {
@@ -1289,86 +1164,95 @@ button { cursor: pointer; }
     font-size: 16px;
   }
 
+  .lcd-hero-eyebrow {
+    font-size: 10px;
+  }
+
+  .lcd-hero-eyebrow-row > i {
+    width: 46px;
+  }
+
   .lcd-hero-meta > div {
-    min-height: 92px;
-    padding-inline: 7px;
+    min-height: 84px;
+    padding-inline: 6px;
   }
 
-  .lcd-logo.is-compact .lcd-wordmark > span {
-    font-size: 21px;
-  }
-
-  .lcd-logo.is-compact .lcd-wordmark svg {
-    width: 31px;
-    height: 27px;
-  }
-
-  .lcd-logo.is-compact .lcd-submark {
-    font-size: 7px;
-  }
-
-  .lcd-study-cta {
-    padding-inline: 10px;
-    font-size: 11px;
+  .lcd-hero-meta strong {
+    font-size: 9px;
   }
 }
 
 @media (min-width: 900px) {
   .lcd-hero-brand {
-    padding: 36px 0 70px;
+    min-height: 760px;
   }
 
-  .lcd-hero-grid-brand {
-    grid-template-columns: .92fr 1.08fr;
-    gap: 44px;
-    align-items: center;
+  .lcd-container.lcd-hero-grid-brand {
+    min-height: 760px;
+    grid-template-columns: 51.5% 48.5%;
   }
 
   .lcd-hero-copy-brand {
     order: 1;
-    margin-top: 0;
-    padding: 16px 0 6px;
-    background: transparent;
-    border-radius: 0;
+    padding:
+      88px
+      46px
+      74px
+      max(6.4vw, 76px);
+    background:
+      radial-gradient(circle at 72% 84%, rgba(215, 239, 249, .36), transparent 32%),
+      transparent;
+  }
+
+  .lcd-hero-eyebrow {
+    font-size: 12px;
   }
 
   .lcd-hero-copy-brand h1 {
-    font-size: clamp(55px, 4.9vw, 76px);
+    max-width: 780px;
+    margin-top: 24px;
+    font-size: clamp(58px, 4.75vw, 76px);
   }
 
   .lcd-hero-lead-brand {
-    font-size: 18px;
+    max-width: 610px;
+    font-size: 19px;
   }
 
   .lcd-hero-actions-brand {
     display: flex;
-    grid-template-columns: none;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 16px;
+    margin-top: 30px;
   }
 
   .lcd-hero-actions-brand .lcd-large {
     width: auto;
-    min-width: 210px;
+    min-width: 230px;
   }
 
   .lcd-hero-meta {
     display: flex;
-    grid-template-columns: none;
-    margin-top: 31px;
+    align-items: center;
+    gap: 0;
+    margin-top: 34px;
     padding-top: 0;
     border-top: 0;
   }
 
   .lcd-hero-meta > div {
     min-height: auto;
-    padding: 0 24px 0 0;
-    margin-right: 24px;
+    padding: 0 27px 0 0;
+    margin-right: 27px;
     flex-direction: row;
-    align-items: center;
-    gap: 9px;
+    justify-content: flex-start;
+    gap: 10px;
     text-align: left;
-    border-right: 1px solid #d7e2ed;
+    border-right: 1px solid #d6e1eb;
+  }
+
+  .lcd-hero-meta > div:not(:last-child) {
+    border-right: 1px solid #d6e1eb;
   }
 
   .lcd-hero-meta > div:last-child {
@@ -1378,449 +1262,64 @@ button { cursor: pointer; }
   }
 
   .lcd-hero-meta strong {
-    font-size: 12px;
+    max-width: 190px;
+    font-size: 13px;
+    line-height: 1.28;
   }
 
-  .lcd-hero-meta small {
-    font-size: 9px;
+  .lcd-hero-limit-note {
+    position: absolute;
+    left: max(3.4vw, 30px);
+    bottom: 36px;
+    display: grid;
+    gap: 1px;
+    color: #6688ba;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .22em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .lcd-hero-limit-note i {
+    display: block;
+    width: 62px;
+    height: 3px;
+    margin-top: 9px;
+    border-radius: 999px;
+    background: #17b9c9;
   }
 
   .lcd-hero-portrait-wrap {
     order: 2;
-    margin: 0;
+    min-height: 760px;
+    height: 760px;
   }
 
   .lcd-hero-portrait-card {
-    min-height: 640px;
-    border-radius: 30px;
-    box-shadow: 0 28px 75px rgba(8, 57, 120, .12);
+    min-height: 760px;
+    height: 760px;
   }
 
   .lcd-hero-portrait {
-    width: 84%;
-    height: 97%;
-    right: -3%;
-    object-position: 52% 8%;
-  }
-
-  .lcd-hero-quote {
-    left: auto;
-    right: 42px;
-    top: 88px;
-    width: 180px;
-    text-align: left;
-  }
-
-  .lcd-hero-quote strong {
-    font-size: 30px;
-  }
-
-  .lcd-hero-quote p {
-    font-size: 14px;
-  }
-
-  .lcd-hero-opportunity {
-    left: auto;
-    right: 42px;
-    bottom: 42px;
-    font-size: 10px;
-  }
-
-  .lcd-study-cta {
-    display: inline-flex;
+    object-position: right center;
   }
 }
 
-@media (min-width: 1200px) {
-  .lcd-hero-grid-brand {
-    gap: 58px;
-  }
-
+@media (min-width: 1400px) {
+  .lcd-hero-brand,
+  .lcd-container.lcd-hero-grid-brand,
+  .lcd-hero-portrait-wrap,
   .lcd-hero-portrait-card {
-    min-height: 690px;
-  }
-
-  .lcd-hero-copy-brand h1 {
-    font-size: 72px;
-  }
-}
-
-
-/* HERO AGREED LAYOUT — DESKTOP + MOBILE */
-.lcd-hero-brand {
-  padding: 34px 0 58px;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 87% 12%, rgba(55,177,226,.10), transparent 30%),
-    linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
-}
-
-.lcd-hero-grid-brand {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  align-items: stretch;
-}
-
-.lcd-hero-copy-brand {
-  order: 2;
-  position: relative;
-  z-index: 3;
-  margin-top: -10px;
-  padding: 30px 0 0;
-  background: #fff;
-}
-
-.lcd-hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  color: #1593ca;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-}
-
-.lcd-hero-eyebrow::after {
-  content: "";
-  width: 72px;
-  height: 3px;
-  border-radius: 999px;
-  background: #18b9c9;
-}
-
-.lcd-hero-copy-brand h1 {
-  max-width: 720px;
-  margin: 18px 0 16px;
-  color: #0a2f78;
-  font-size: clamp(40px, 10vw, 70px);
-  line-height: .97;
-  letter-spacing: -.055em;
-  font-weight: 850;
-}
-
-.lcd-hero-copy-brand h1 span {
-  background: linear-gradient(90deg, #0b4ea7 0%, #0c79c9 50%, #13b7c8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.lcd-hero-lead-brand {
-  max-width: 620px;
-  margin: 0;
-  color: #51647c;
-  font-size: 17px;
-  line-height: 1.58;
-}
-
-.lcd-hero-actions-brand {
-  display: grid;
-  gap: 11px;
-  margin-top: 25px;
-}
-
-.lcd-hero-actions-brand .lcd-large {
-  width: 100%;
-  min-height: 54px;
-  border-radius: 15px;
-}
-
-.lcd-hero-meta {
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  margin-top: 28px;
-  padding-top: 20px;
-  border-top: 1px solid #dfe8f1;
-}
-
-.lcd-hero-meta > div {
-  min-width: 0;
-  min-height: 90px;
-  padding: 0 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-}
-
-.lcd-hero-meta > div:not(:last-child) {
-  border-right: 1px solid #dce6ef;
-}
-
-.lcd-hero-meta svg {
-  color: #0b4a9a;
-  flex: none;
-}
-
-.lcd-hero-meta strong,
-.lcd-hero-meta small {
-  display: block;
-}
-
-.lcd-hero-meta strong {
-  color: #163b73;
-  font-size: 11px;
-  line-height: 1.25;
-}
-
-.lcd-hero-meta small {
-  margin-top: 3px;
-  color: #7d8da0;
-  font-size: 9px;
-  line-height: 1.3;
-  font-weight: 500;
-}
-
-.lcd-hero-portrait-wrap {
-  order: 1;
-  margin: 0 -16px;
-}
-
-.lcd-hero-portrait-card {
-  position: relative;
-  min-height: 470px;
-  overflow: hidden;
-  background: #edf7fc;
-}
-
-.lcd-hero-portrait-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 -40px 70px rgba(255,255,255,.05);
-}
-
-.lcd-hero-portrait {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-}
-
-.lcd-hero-quote {
-  position: absolute;
-  z-index: 2;
-  left: 20px;
-  top: 42px;
-  width: 150px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-}
-
-.lcd-hero-quote strong {
-  display: block;
-  margin-bottom: 10px;
-  color: #0a347d;
-  font-size: 26px;
-  line-height: 1;
-  font-style: italic;
-  font-weight: 500;
-}
-
-.lcd-hero-quote p {
-  margin: 0;
-  color: #53647b;
-  font-size: 13px;
-  line-height: 1.35;
-  font-weight: 650;
-}
-
-@media (max-width: 899px) {
-  .lcd-header-inner {
-    gap: 8px;
-  }
-
-  .lcd-study-cta {
-    display: inline-flex;
-    min-height: 40px;
-    padding: 0 12px;
-    border-radius: 11px;
-    font-size: 11px;
-    white-space: nowrap;
-  }
-
-  .lcd-hero-brand {
-    padding-top: 0;
-  }
-
-  .lcd-container.lcd-hero-grid-brand {
-    width: min(100%, 760px);
-  }
-
-  .lcd-hero-portrait-wrap {
-    margin: 0;
+    min-height: 800px;
+    height: 800px;
   }
 
   .lcd-hero-copy-brand {
-    padding-inline: 18px;
-  }
-
-  .lcd-hero-portrait-card {
-    min-height: 500px;
-  }
-
-  .lcd-hero-portrait {
-    object-position: 58% 50%;
-  }
-}
-
-@media (max-width: 520px) {
-  .lcd-container.lcd-hero-grid-brand {
-    width: 100%;
-  }
-
-  .lcd-hero-portrait-card {
-    min-height: 430px;
-  }
-
-  .lcd-hero-portrait {
-    object-position: 59% 50%;
-  }
-
-  .lcd-hero-copy-brand {
-    padding: 25px 20px 0;
+    padding-top: 96px;
   }
 
   .lcd-hero-copy-brand h1 {
-    font-size: 39px;
-  }
-
-  .lcd-hero-lead-brand {
-    font-size: 16px;
-  }
-
-  .lcd-hero-quote {
-    left: 22px;
-    top: 54px;
-    width: 142px;
-  }
-
-  .lcd-hero-quote strong {
-    font-size: 24px;
-  }
-
-  .lcd-hero-quote p {
-    font-size: 12px;
-  }
-
-  .lcd-hero-meta > div {
-    min-height: 90px;
-    padding-inline: 6px;
-  }
-}
-
-@media (min-width: 900px) {
-  .lcd-hero-brand {
-    padding: 56px 0 78px;
-  }
-
-  .lcd-hero-grid-brand {
-    grid-template-columns: .94fr 1.06fr;
-    gap: 34px;
-    align-items: center;
-  }
-
-  .lcd-hero-copy-brand {
-    order: 1;
-    margin-top: 0;
-    padding: 0;
-    background: transparent;
-  }
-
-  .lcd-hero-copy-brand h1 {
-    font-size: clamp(56px, 4.8vw, 74px);
-    max-width: 720px;
-  }
-
-  .lcd-hero-lead-brand {
-    font-size: 18px;
-  }
-
-  .lcd-hero-actions-brand {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  .lcd-hero-actions-brand .lcd-large {
-    width: auto;
-    min-width: 220px;
-  }
-
-  .lcd-hero-meta {
-    display: flex;
-    margin-top: 31px;
-    padding-top: 0;
-    border-top: 0;
-  }
-
-  .lcd-hero-meta > div {
-    min-height: auto;
-    padding: 0 25px 0 0;
-    margin-right: 25px;
-    flex-direction: row;
-    align-items: center;
-    gap: 9px;
-    text-align: left;
-  }
-
-  .lcd-hero-meta > div:not(:last-child) {
-    border-right: 1px solid #d7e2ed;
-  }
-
-  .lcd-hero-meta > div:last-child {
-    margin-right: 0;
-    padding-right: 0;
-  }
-
-  .lcd-hero-meta strong {
-    font-size: 12px;
-  }
-
-  .lcd-hero-meta small {
-    font-size: 9px;
-  }
-
-  .lcd-hero-portrait-wrap {
-    order: 2;
-    margin: 0;
-  }
-
-  .lcd-hero-portrait-card {
-    min-height: 640px;
-    border-radius: 0;
-    background: transparent;
-  }
-
-  .lcd-hero-portrait {
-    object-fit: cover;
-    object-position: center center;
-  }
-
-  .lcd-hero-quote {
-    display: none;
-  }
-}
-
-@media (min-width: 1200px) {
-  .lcd-hero-grid-brand {
-    gap: 50px;
-  }
-
-  .lcd-hero-portrait-card {
-    min-height: 680px;
-  }
-
-  .lcd-hero-copy-brand h1 {
-    font-size: 72px;
+    font-size: 76px;
   }
 }
