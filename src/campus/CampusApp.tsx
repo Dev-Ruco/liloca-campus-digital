@@ -26,7 +26,6 @@ import {
 import { BrowserRouter, Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import { CampusLogo } from "./CampusLogo";
 import { Course, courses, stats } from "./data";
-import { heroVisual } from "./heroVisual";
 import "./campus.css";
 
 const navItems = [
@@ -107,7 +106,7 @@ function Home() {
     <Shell>
       <main>
         <section className="lcd-hero lcd-hero-brand" id="inicio">
-          <div className="lcd-container lcd-hero-grid lcd-hero-grid-brand">
+          <div className="lcd-hero-canvas">
             <div className="lcd-hero-copy lcd-hero-copy-brand">
               <div className="lcd-hero-eyebrow-row">
                 <span className="lcd-hero-eyebrow">Liloca Campus Digital</span>
@@ -115,7 +114,7 @@ function Home() {
               </div>
 
               <h1>
-                Aprenda com <span>universidades e instituições reconhecidas</span>
+                Aprenda com universidades e instituições <span>reconhecidas</span>
               </h1>
 
               <p className="lcd-hero-lead lcd-hero-lead-brand">
@@ -134,15 +133,15 @@ function Home() {
 
               <div className="lcd-hero-meta">
                 <div>
-                  <GraduationCap size={24} />
+                  <GraduationCap size={25} />
                   <strong>Formação prática</strong>
                 </div>
                 <div>
-                  <Monitor size={24} />
+                  <Monitor size={25} />
                   <strong>100% online</strong>
                 </div>
                 <div>
-                  <ShieldCheck size={24} />
+                  <ShieldCheck size={25} />
                   <strong>Certificação conforme o parceiro</strong>
                 </div>
               </div>
@@ -154,13 +153,29 @@ function Home() {
               </div>
             </div>
 
-            <div className="lcd-hero-portrait-wrap" aria-label="Liloca Campus Digital">
-              <div className="lcd-hero-portrait-card">
-                <img
-                  className="lcd-hero-portrait"
-                  src={heroVisual}
-                  alt="Liloca"
-                />
+            <div className="lcd-hero-visual" aria-label="Liloca">
+              <div className="lcd-hero-orb lcd-hero-orb-soft" />
+              <div className="lcd-hero-orb lcd-hero-orb-blue" />
+              <div className="lcd-hero-orb lcd-hero-orb-cyan" />
+              <div className="lcd-hero-dot-grid" />
+
+              <img
+                className="lcd-hero-person"
+                src="/liloca-campus-cutout.webp"
+                alt="Liloca"
+              />
+
+              <div className="lcd-hero-signature">
+                <strong>Liloca</strong>
+                <p>“Educação transforma realidades.”</p>
+              </div>
+
+              <div className="lcd-hero-opportunity">
+                <span>Mais</span>
+                <span>pessoas</span>
+                <span>mais</span>
+                <span>oportunidades</span>
+                <i />
               </div>
             </div>
           </div>
