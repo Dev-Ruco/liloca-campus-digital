@@ -25,6 +25,7 @@ import {
 import { BrowserRouter, Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import { CampusLogo } from "./CampusLogo";
 import { Course, courses, stats } from "./data";
+import { heroVisual } from "./heroVisual";
 import "./campus.css";
 
 const navItems = [
@@ -145,26 +146,15 @@ function Home() {
 
             <div className="lcd-hero-portrait-wrap">
               <div className="lcd-hero-portrait-card">
-                <div className="lcd-hero-shape lcd-hero-shape-one" />
-                <div className="lcd-hero-shape lcd-hero-shape-two" />
-                <div className="lcd-hero-shape lcd-hero-shape-three" />
-
                 <img
                   className="lcd-hero-portrait"
-                  src="/liloca-campus-hero.webp"
-                  
-                  
+                  src={heroVisual}
                   alt="Liloca"
                 />
 
                 <div className="lcd-hero-quote">
                   <strong>Liloca</strong>
                   <p>“Educação transforma realidades.”</p>
-                </div>
-
-                <div className="lcd-hero-opportunity">
-                  <span>Mais pessoas</span>
-                  <span>Mais oportunidades</span>
                 </div>
               </div>
             </div>
