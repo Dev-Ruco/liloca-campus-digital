@@ -1444,3 +1444,383 @@ button { cursor: pointer; }
     font-size: 72px;
   }
 }
+
+
+/* HERO AGREED LAYOUT — DESKTOP + MOBILE */
+.lcd-hero-brand {
+  padding: 34px 0 58px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 87% 12%, rgba(55,177,226,.10), transparent 30%),
+    linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
+}
+
+.lcd-hero-grid-brand {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+
+.lcd-hero-copy-brand {
+  order: 2;
+  position: relative;
+  z-index: 3;
+  margin-top: -10px;
+  padding: 30px 0 0;
+  background: #fff;
+}
+
+.lcd-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: #1593ca;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.lcd-hero-eyebrow::after {
+  content: "";
+  width: 72px;
+  height: 3px;
+  border-radius: 999px;
+  background: #18b9c9;
+}
+
+.lcd-hero-copy-brand h1 {
+  max-width: 720px;
+  margin: 18px 0 16px;
+  color: #0a2f78;
+  font-size: clamp(40px, 10vw, 70px);
+  line-height: .97;
+  letter-spacing: -.055em;
+  font-weight: 850;
+}
+
+.lcd-hero-copy-brand h1 span {
+  background: linear-gradient(90deg, #0b4ea7 0%, #0c79c9 50%, #13b7c8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lcd-hero-lead-brand {
+  max-width: 620px;
+  margin: 0;
+  color: #51647c;
+  font-size: 17px;
+  line-height: 1.58;
+}
+
+.lcd-hero-actions-brand {
+  display: grid;
+  gap: 11px;
+  margin-top: 25px;
+}
+
+.lcd-hero-actions-brand .lcd-large {
+  width: 100%;
+  min-height: 54px;
+  border-radius: 15px;
+}
+
+.lcd-hero-meta {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #dfe8f1;
+}
+
+.lcd-hero-meta > div {
+  min-width: 0;
+  min-height: 90px;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.lcd-hero-meta > div:not(:last-child) {
+  border-right: 1px solid #dce6ef;
+}
+
+.lcd-hero-meta svg {
+  color: #0b4a9a;
+  flex: none;
+}
+
+.lcd-hero-meta strong,
+.lcd-hero-meta small {
+  display: block;
+}
+
+.lcd-hero-meta strong {
+  color: #163b73;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.lcd-hero-meta small {
+  margin-top: 3px;
+  color: #7d8da0;
+  font-size: 9px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.lcd-hero-portrait-wrap {
+  order: 1;
+  margin: 0 -16px;
+}
+
+.lcd-hero-portrait-card {
+  position: relative;
+  min-height: 470px;
+  overflow: hidden;
+  background: #edf7fc;
+}
+
+.lcd-hero-portrait-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 -40px 70px rgba(255,255,255,.05);
+}
+
+.lcd-hero-portrait {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.lcd-hero-quote {
+  position: absolute;
+  z-index: 2;
+  left: 20px;
+  top: 42px;
+  width: 150px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.lcd-hero-quote strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #0a347d;
+  font-size: 26px;
+  line-height: 1;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.lcd-hero-quote p {
+  margin: 0;
+  color: #53647b;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 650;
+}
+
+@media (max-width: 899px) {
+  .lcd-header-inner {
+    gap: 8px;
+  }
+
+  .lcd-study-cta {
+    display: inline-flex;
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: 11px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .lcd-hero-brand {
+    padding-top: 0;
+  }
+
+  .lcd-container.lcd-hero-grid-brand {
+    width: min(100%, 760px);
+  }
+
+  .lcd-hero-portrait-wrap {
+    margin: 0;
+  }
+
+  .lcd-hero-copy-brand {
+    padding-inline: 18px;
+  }
+
+  .lcd-hero-portrait-card {
+    min-height: 500px;
+  }
+
+  .lcd-hero-portrait {
+    object-position: 58% 50%;
+  }
+}
+
+@media (max-width: 520px) {
+  .lcd-container.lcd-hero-grid-brand {
+    width: 100%;
+  }
+
+  .lcd-hero-portrait-card {
+    min-height: 430px;
+  }
+
+  .lcd-hero-portrait {
+    object-position: 59% 50%;
+  }
+
+  .lcd-hero-copy-brand {
+    padding: 25px 20px 0;
+  }
+
+  .lcd-hero-copy-brand h1 {
+    font-size: 39px;
+  }
+
+  .lcd-hero-lead-brand {
+    font-size: 16px;
+  }
+
+  .lcd-hero-quote {
+    left: 22px;
+    top: 54px;
+    width: 142px;
+  }
+
+  .lcd-hero-quote strong {
+    font-size: 24px;
+  }
+
+  .lcd-hero-quote p {
+    font-size: 12px;
+  }
+
+  .lcd-hero-meta > div {
+    min-height: 90px;
+    padding-inline: 6px;
+  }
+}
+
+@media (min-width: 900px) {
+  .lcd-hero-brand {
+    padding: 56px 0 78px;
+  }
+
+  .lcd-hero-grid-brand {
+    grid-template-columns: .94fr 1.06fr;
+    gap: 34px;
+    align-items: center;
+  }
+
+  .lcd-hero-copy-brand {
+    order: 1;
+    margin-top: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  .lcd-hero-copy-brand h1 {
+    font-size: clamp(56px, 4.8vw, 74px);
+    max-width: 720px;
+  }
+
+  .lcd-hero-lead-brand {
+    font-size: 18px;
+  }
+
+  .lcd-hero-actions-brand {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .lcd-hero-actions-brand .lcd-large {
+    width: auto;
+    min-width: 220px;
+  }
+
+  .lcd-hero-meta {
+    display: flex;
+    margin-top: 31px;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .lcd-hero-meta > div {
+    min-height: auto;
+    padding: 0 25px 0 0;
+    margin-right: 25px;
+    flex-direction: row;
+    align-items: center;
+    gap: 9px;
+    text-align: left;
+  }
+
+  .lcd-hero-meta > div:not(:last-child) {
+    border-right: 1px solid #d7e2ed;
+  }
+
+  .lcd-hero-meta > div:last-child {
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .lcd-hero-meta strong {
+    font-size: 12px;
+  }
+
+  .lcd-hero-meta small {
+    font-size: 9px;
+  }
+
+  .lcd-hero-portrait-wrap {
+    order: 2;
+    margin: 0;
+  }
+
+  .lcd-hero-portrait-card {
+    min-height: 640px;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .lcd-hero-portrait {
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .lcd-hero-quote {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .lcd-hero-grid-brand {
+    gap: 50px;
+  }
+
+  .lcd-hero-portrait-card {
+    min-height: 680px;
+  }
+
+  .lcd-hero-copy-brand h1 {
+    font-size: 72px;
+  }
+}
