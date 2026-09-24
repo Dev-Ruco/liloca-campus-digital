@@ -2450,3 +2450,150 @@ button { cursor: pointer; }
     display:none;
   }
 }
+
+
+/* INSTITUTION LOGO MARQUEE */
+.lcd-institution-strip{
+  padding:42px 0 34px;
+  overflow:hidden;
+  border-top:1px solid #edf2f6;
+  border-bottom:1px solid #e7eef5;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(18,184,198,.055),transparent 34%),
+    #fff;
+}
+
+.lcd-institution-copy{
+  max-width:760px;
+  margin:0 auto 24px;
+  text-align:center;
+}
+
+.lcd-institution-copy .lcd-eyebrow{
+  margin-bottom:9px;
+}
+
+.lcd-institution-copy h2{
+  margin:0;
+  color:var(--lcd-navy-deep);
+  font-size:clamp(28px,3.4vw,44px);
+  line-height:1.08;
+  letter-spacing:-.035em;
+}
+
+.lcd-institution-copy p{
+  max-width:650px;
+  margin:11px auto 0;
+  color:#68798c;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.lcd-institution-marquee{
+  position:relative;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+}
+
+.lcd-institution-track{
+  display:flex;
+  width:max-content;
+  align-items:center;
+  animation:lcdInstitutionMarquee 34s linear infinite;
+  will-change:transform;
+}
+
+.lcd-institution-marquee:hover .lcd-institution-track{
+  animation-play-state:paused;
+}
+
+.lcd-institution-track img{
+  display:block;
+  width:1760px;
+  height:108px;
+  flex:none;
+  object-fit:contain;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+
+.lcd-institution-note{
+  max-width:760px;
+  margin:18px auto 0;
+  color:#95a1ae;
+  font-size:10px;
+  line-height:1.45;
+  text-align:center;
+}
+
+@keyframes lcdInstitutionMarquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-1760px)}
+}
+
+@media (max-width:768px){
+  .lcd-institution-strip{
+    padding:30px 0 26px;
+  }
+
+  .lcd-institution-copy{
+    margin-bottom:18px;
+    padding:0 5px;
+    text-align:left;
+  }
+
+  .lcd-institution-copy h2{
+    font-size:27px;
+  }
+
+  .lcd-institution-copy p{
+    margin-top:9px;
+    font-size:14px;
+  }
+
+  .lcd-institution-marquee{
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);
+  }
+
+  .lcd-institution-track img{
+    width:1320px;
+    height:81px;
+  }
+
+  @keyframes lcdInstitutionMarquee{
+    from{transform:translateX(0)}
+    to{transform:translateX(-1320px)}
+  }
+
+  .lcd-institution-note{
+    margin-top:14px;
+    padding:0 8px;
+    font-size:9px;
+    text-align:left;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .lcd-institution-marquee{
+    overflow-x:auto;
+    -webkit-mask-image:none;
+    mask-image:none;
+    scrollbar-width:none;
+  }
+
+  .lcd-institution-marquee::-webkit-scrollbar{
+    display:none;
+  }
+
+  .lcd-institution-track{
+    animation:none;
+  }
+
+  .lcd-institution-track img[aria-hidden="true"]{
+    display:none;
+  }
+}
