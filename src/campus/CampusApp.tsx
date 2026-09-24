@@ -181,6 +181,36 @@ function Home() {
           </div>
         </section>
 
+        <section className="lcd-institution-strip" aria-labelledby="instituicoes-titulo">
+          <div className="lcd-container">
+            <div className="lcd-institution-copy">
+              <span className="lcd-eyebrow">Universidades e organizações</span>
+              <h2 id="instituicoes-titulo">Aprenda com universidades e empresas de referência</h2>
+              <p>Uma plataforma preparada para aproximar formação prática, instituições académicas e organizações do mercado.</p>
+            </div>
+
+            <div className="lcd-institution-marquee" aria-label="Instituições de referência">
+              <div className="lcd-institution-track">
+                <img
+                  src="/partners/partner-strip.webp"
+                  alt="Logótipos de universidades e organizações de referência"
+                  draggable="false"
+                />
+                <img
+                  src="/partners/partner-strip.webp"
+                  alt=""
+                  aria-hidden="true"
+                  draggable="false"
+                />
+              </div>
+            </div>
+
+            <p className="lcd-institution-note">
+              Instituições apresentadas como referências para integração e parceria no protótipo; a participação em cursos depende de acordos formalizados.
+            </p>
+          </div>
+        </section>
+
         <section className="lcd-section" id="cursos">
           <div className="lcd-container">
             <div className="lcd-section-heading">
