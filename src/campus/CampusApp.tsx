@@ -492,47 +492,159 @@ function StudyArea() {
   const [questionAsked, setQuestionAsked] = useState(false);
   const [answer, setAnswer] = useState<number | null>(null);
   const [materialOpen, setMaterialOpen] = useState(false);
+  const [syllabusOpen, setSyllabusOpen] = useState(false);
+  const [completedLessons, setCompletedLessons] = useState<number[]>([]);
+  const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([]);
+  const [lessonPositions, setLessonPositions] = useState<Record<number, number>>({});
   const videoRef = useRef<HTMLVideoElement>(null);
+  const lastSavedSecond = useRef(-1);
   const lesson = course.syllabus[lessonIndex];
+  const storageKey = "lcd-study-progress:" + course.id;
+
+  function saveStudyState(next: {
+    completed?: number[];
+    answered?: number[];
+    positions?: Record<number, number>;
+  }) {
+    const payload = {
+      completed: next.completed ?? completedLessons,
+      answered: next.answered ?? answeredQuestions,
+      positions: next.positions ?? lessonPositions,
+    };
+    localStorage.setItem(storageKey, JSON.stringify(payload));
+  }
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(storageKey);
+      if (!stored) return;
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed.completed)) setCompletedLessons(parsed.completed);
+      if (Array.isArray(parsed.answered)) setAnsweredQuestions(parsed.answered);
+      if (parsed.positions && typeof parsed.positions === "object") setLessonPositions(parsed.positions);
+    } catch {
+      // Um progresso local corrompido não deve impedir o aluno de estudar.
+    }
+  }, [storageKey]);
 
   useEffect(() => {
     setQuestionOpen(false);
     setQuestionAsked(false);
     setAnswer(null);
     setMaterialOpen(false);
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.load();
-    }
+    lastSavedSecond.current = -1;
+
+    const video = videoRef.current;
+    if (video) video.load();
   }, [lessonIndex]);
 
-  function maybeAskQuestion() {
+  useEffect(() => {
+    if (!syllabusOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSyllabusOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [syllabusOpen]);
+
+  function persistPosition(currentTime: number) {
+    const second = Math.floor(currentTime);
+    if (second === lastSavedSecond.current || second % 2 !== 0) return;
+    lastSavedSecond.current = second;
+    const positions = { ...lessonPositions, [lesson.id]: currentTime };
+    setLessonPositions(positions);
+    saveStudyState({ positions });
+  }
+
+  function restorePosition() {
     const video = videoRef.current;
-    if (!video || questionAsked || !lesson.question) return;
-    if (video.currentTime >= 4) {
+    const saved = lessonPositions[lesson.id];
+    if (!video || !saved || !Number.isFinite(video.duration)) return;
+    if (saved < Math.max(video.duration - 1, 0)) video.currentTime = saved;
+  }
+
+  function markLessonComplete() {
+    const questionSatisfied = !lesson.question || answeredQuestions.includes(lesson.id);
+    if (!questionSatisfied || completedLessons.includes(lesson.id)) return;
+
+    const completed = [...completedLessons, lesson.id];
+    setCompletedLessons(completed);
+    saveStudyState({ completed });
+  }
+
+  function handleTimeUpdate() {
+    const video = videoRef.current;
+    if (!video) return;
+
+    persistPosition(video.currentTime);
+
+    const alreadyAnswered = answeredQuestions.includes(lesson.id);
+    if (!questionAsked && !alreadyAnswered && lesson.question && video.currentTime >= 4) {
       video.pause();
       setQuestionAsked(true);
       setQuestionOpen(true);
     }
+
+    if (video.duration && video.currentTime / video.duration >= 0.9) {
+      markLessonComplete();
+    }
+  }
+
+  function chooseAnswer(index: number) {
+    setAnswer(index);
+    if (!lesson.question || index !== lesson.question.correct || answeredQuestions.includes(lesson.id)) return;
+
+    const answered = [...answeredQuestions, lesson.id];
+    setAnsweredQuestions(answered);
+    saveStudyState({ answered });
+
+    const video = videoRef.current;
+    if (video?.duration && video.currentTime / video.duration >= 0.9 && !completedLessons.includes(lesson.id)) {
+      const completed = [...completedLessons, lesson.id];
+      setCompletedLessons(completed);
+      saveStudyState({ answered, completed });
+    }
   }
 
   function continueVideo() {
+    if (lesson.question && answer !== lesson.question.correct) return;
     setQuestionOpen(false);
     videoRef.current?.play().catch(() => undefined);
   }
 
-  const completion = Math.round(((lessonIndex + 1) / course.syllabus.length) * 100);
+  function selectLesson(index: number) {
+    const video = videoRef.current;
+    if (video) {
+      const positions = { ...lessonPositions, [lesson.id]: video.currentTime };
+      setLessonPositions(positions);
+      saveStudyState({ positions });
+    }
+
+    setLessonIndex(index);
+    setSyllabusOpen(false);
+    window.setTimeout(() => {
+      document.querySelector(".lcd-player-wrap")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  }
+
+  const completion = Math.round((completedLessons.length / course.syllabus.length) * 100);
+  const isCurrentComplete = completedLessons.includes(lesson.id);
 
   return (
-    <div className="lcd-study">
+    <div className={"lcd-study" + (syllabusOpen ? " syllabus-open" : "")}>
       <header className="lcd-study-header">
+        <Link className="lcd-study-back" to={"/curso/" + course.id} aria-label="Voltar ao curso">
+          <ArrowLeft size={20} />
+        </Link>
         <Link to="/" className="lcd-study-logo"><CampusLogo compact /></Link>
         <div className="lcd-study-course">
           <span>{course.title}</span>
-          <small>{completion}% concluído</small>
+          <small>{completedLessons.length} de {course.syllabus.length} aulas concluídas</small>
         </div>
-        <div className="lcd-study-progress"><span style={{ width: completion + "%" }} /></div>
-        <Link className="lcd-study-exit" to={"/curso/" + course.id}>Sair da aula</Link>
+        <Link className="lcd-study-exit" to={"/curso/" + course.id}>Sair</Link>
+        <div className="lcd-study-progress" aria-label={completion + "% concluído"}>
+          <span style={{ width: completion + "%" }} />
+        </div>
       </header>
 
       <main className="lcd-study-layout">
@@ -542,7 +654,9 @@ function StudyArea() {
               ref={videoRef}
               className="lcd-video"
               controls
-              onTimeUpdate={maybeAskQuestion}
+              onLoadedMetadata={restorePosition}
+              onTimeUpdate={handleTimeUpdate}
+              onEnded={markLessonComplete}
               playsInline
               preload="metadata"
               poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop stop-color='%23072d67'/%3E%3Cstop offset='.55' stop-color='%230a65aa'/%3E%3Cstop offset='1' stop-color='%230fb8c1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1280' height='720' fill='url(%23g)'/%3E%3Ccircle cx='640' cy='340' r='72' fill='white' opacity='.94'/%3E%3Cpath d='M620 298l70 42-70 42z' fill='%23084d91'/%3E%3Ctext x='640' y='485' text-anchor='middle' fill='white' font-family='Arial' font-size='34'%3ELiloca Campus Digital%3C/text%3E%3C/svg%3E"
@@ -552,7 +666,7 @@ function StudyArea() {
 
             {questionOpen && lesson.question && (
               <div className="lcd-question-overlay">
-                <div className="lcd-question-box">
+                <div className="lcd-question-box" role="dialog" aria-modal="true" aria-label="Pergunta durante a aula">
                   <span className="lcd-question-label">Pergunta durante a aula</span>
                   <h2>{lesson.question.prompt}</h2>
                   <div className="lcd-question-options">
@@ -563,7 +677,7 @@ function StudyArea() {
                         <button
                           key={option}
                           className={(chosen ? "chosen " : "") + (answer !== null && correct ? "correct" : "")}
-                          onClick={() => setAnswer(index)}
+                          onClick={() => chooseAnswer(index)}
                         >
                           <span>{String.fromCharCode(65 + index)}</span>{option}
                         </button>
@@ -572,11 +686,15 @@ function StudyArea() {
                   </div>
                   {answer !== null && (
                     <div className={"lcd-answer-note " + (answer === lesson.question.correct ? "right" : "wrong")}>
-                      <strong>{answer === lesson.question.correct ? "Resposta correcta." : "Ainda não."}</strong>
+                      <strong>{answer === lesson.question.correct ? "Resposta correcta." : "Tente novamente."}</strong>
                       <p>{lesson.question.explanation}</p>
                     </div>
                   )}
-                  <button className="lcd-primary-button lcd-full" disabled={answer === null} onClick={continueVideo}>
+                  <button
+                    className="lcd-primary-button lcd-full"
+                    disabled={answer !== lesson.question.correct}
+                    onClick={continueVideo}
+                  >
                     Continuar a aula <Play size={17} />
                   </button>
                 </div>
@@ -585,16 +703,20 @@ function StudyArea() {
           </div>
 
           <div className="lcd-lesson-info">
-            <div>
-              <span>Aula {lessonIndex + 1} de {course.syllabus.length}</span>
+            <div className="lcd-lesson-copy">
+              <div className="lcd-lesson-kicker-row">
+                <span>Aula {lessonIndex + 1} de {course.syllabus.length}</span>
+                {isCurrentComplete && <strong className="lcd-complete-pill"><Check size={14} /> Concluída</strong>}
+              </div>
               <h1>{lesson.title}</h1>
-              <p>Vídeo de demonstração. Na versão funcional, cada aula terá o vídeo do formador, progresso guardado e perguntas configuradas pela instituição.</p>
+              <p>Assista ao vídeo, consulte o material de apoio e complete as actividades desta aula antes de avançar.</p>
             </div>
+
             {lesson.pdf && (
               <button className="lcd-material-button" onClick={() => setMaterialOpen(!materialOpen)}>
-                <FileText size={19} />
-                <span><strong>Material da aula</strong><small>{lesson.pdf} · PDF</small></span>
-                <Download size={17} />
+                <FileText size={20} />
+                <span><strong>{lesson.pdf}</strong><small>Material de apoio · PDF</small></span>
+                <ChevronRight size={18} />
               </button>
             )}
           </div>
@@ -602,34 +724,62 @@ function StudyArea() {
           {materialOpen && (
             <div className="lcd-material-preview">
               <div><FileText size={26} /></div>
-              <div><strong>{lesson.pdf}</strong><p>Pré-visualização do espaço reservado para o material PDF associado a esta vídeo-aula.</p></div>
-              <button onClick={() => setMaterialOpen(false)}><X size={18} /></button>
+              <div>
+                <strong>{lesson.pdf}</strong>
+                <p>Área de demonstração para visualizar o material da aula. Na versão final, o PDF abre no navegador com opção de descarregar.</p>
+              </div>
+              <button aria-label="Fechar material" onClick={() => setMaterialOpen(false)}><X size={18} /></button>
             </div>
           )}
 
-          <div className="lcd-lesson-navigation">
-            <button disabled={lessonIndex === 0} onClick={() => setLessonIndex((i) => Math.max(0, i - 1))}><ArrowLeft size={17} /> Aula anterior</button>
-            <button className="next" disabled={lessonIndex === course.syllabus.length - 1} onClick={() => setLessonIndex((i) => Math.min(course.syllabus.length - 1, i + 1))}>Próxima aula <ArrowRight size={17} /></button>
+          <button className="lcd-mobile-course-trigger" onClick={() => setSyllabusOpen(true)}>
+            <span><BookOpen size={20} /><strong>Aula {lessonIndex + 1} de {course.syllabus.length}</strong></span>
+            <span>Ver conteúdo <ChevronRight size={17} /></span>
+          </button>
+
+          <div className="lcd-lesson-navigation" aria-label="Navegação entre aulas">
+            <button disabled={lessonIndex === 0} onClick={() => selectLesson(Math.max(0, lessonIndex - 1))}>
+              <ArrowLeft size={18} />
+              <span className="lcd-nav-long">Aula anterior</span>
+              <span className="lcd-nav-short">Anterior</span>
+            </button>
+            <button className="next" disabled={lessonIndex === course.syllabus.length - 1} onClick={() => selectLesson(Math.min(course.syllabus.length - 1, lessonIndex + 1))}>
+              <span className="lcd-nav-long">Próxima aula</span>
+              <span className="lcd-nav-short">Próxima</span>
+              <ArrowRight size={18} />
+            </button>
           </div>
         </section>
 
-        <aside className="lcd-lesson-sidebar">
+        {syllabusOpen && <button className="lcd-sheet-backdrop" aria-label="Fechar conteúdo do curso" onClick={() => setSyllabusOpen(false)} />}
+
+        <aside className={"lcd-lesson-sidebar" + (syllabusOpen ? " open" : "")} aria-label="Conteúdo do curso">
+          <div className="lcd-sidebar-handle" aria-hidden="true" />
           <div className="lcd-sidebar-title">
             <div><BookOpen size={19} /><strong>Conteúdo do curso</strong></div>
-            <span>{course.syllabus.length} aulas</span>
+            <span>{completedLessons.length}/{course.syllabus.length} concluídas</span>
+            <button className="lcd-sidebar-close" aria-label="Fechar conteúdo" onClick={() => setSyllabusOpen(false)}><X size={19} /></button>
           </div>
           <div className="lcd-lesson-list">
-            {course.syllabus.map((item, index) => (
-              <button key={item.id} className={index === lessonIndex ? "active" : ""} onClick={() => setLessonIndex(index)}>
-                <span className="lcd-lesson-status">{index < lessonIndex ? <Check size={15} /> : index + 1}</span>
-                <span className="lcd-lesson-text"><strong>{item.title}</strong><small>{item.duration}{item.pdf ? " · PDF" : ""}</small></span>
-                {index === lessonIndex && <CirclePlay size={18} />}
-              </button>
-            ))}
+            {course.syllabus.map((item, index) => {
+              const completed = completedLessons.includes(item.id);
+              return (
+                <button key={item.id} className={index === lessonIndex ? "active" : ""} onClick={() => selectLesson(index)}>
+                  <span className={"lcd-lesson-status" + (completed ? " completed" : "")}>
+                    {completed ? <Check size={15} /> : index + 1}
+                  </span>
+                  <span className="lcd-lesson-text">
+                    <strong>{item.title}</strong>
+                    <small>{item.duration}{item.pdf ? " · PDF" : ""}</small>
+                  </span>
+                  {index === lessonIndex && <CirclePlay size={18} />}
+                </button>
+              );
+            })}
           </div>
-          <div className="lcd-sidebar-certificate">
-            <Award size={22} />
-            <div><strong>Certificado</strong><p>Disponível após cumprir os critérios definidos pela instituição.</p></div>
+          <div className="lcd-sidebar-progress-note">
+            <CheckCircle2 size={20} />
+            <div><strong>{completion}% concluído</strong><p>O progresso conta apenas aulas efectivamente concluídas.</p></div>
           </div>
         </aside>
       </main>
