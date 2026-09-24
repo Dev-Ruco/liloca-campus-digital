@@ -131,18 +131,19 @@ function Home() {
                 </Link>
               </div>
 
-              <div className="lcd-hero-meta">
-                <div>
-                  <GraduationCap size={25} />
-                  <strong>Formação prática</strong>
-                </div>
-                <div>
-                  <Monitor size={25} />
-                  <strong>100% online</strong>
-                </div>
-                <div>
-                  <ShieldCheck size={25} />
-                  <strong>Certificação conforme o parceiro</strong>
+              <div className="lcd-hero-partners" aria-label="Universidades e organizações de referência">
+                <div className="lcd-hero-partners-track">
+                  <img
+                    src="/partners/partner-strip.webp"
+                    alt="Logótipos de universidades e organizações de referência"
+                    draggable="false"
+                  />
+                  <img
+                    src="/partners/partner-strip.webp"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                  />
                 </div>
               </div>
 
@@ -178,36 +179,6 @@ function Home() {
                 <i />
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="lcd-institution-strip" aria-labelledby="instituicoes-titulo">
-          <div className="lcd-container">
-            <div className="lcd-institution-copy">
-              <span className="lcd-eyebrow">Universidades e organizações</span>
-              <h2 id="instituicoes-titulo">Aprenda com universidades e empresas de referência</h2>
-              <p>Uma plataforma preparada para aproximar formação prática, instituições académicas e organizações do mercado.</p>
-            </div>
-
-            <div className="lcd-institution-marquee" aria-label="Instituições de referência">
-              <div className="lcd-institution-track">
-                <img
-                  src="/partners/partner-strip.webp"
-                  alt="Logótipos de universidades e organizações de referência"
-                  draggable="false"
-                />
-                <img
-                  src="/partners/partner-strip.webp"
-                  alt=""
-                  aria-hidden="true"
-                  draggable="false"
-                />
-              </div>
-            </div>
-
-            <p className="lcd-institution-note">
-              Instituições apresentadas como referências para integração e parceria no protótipo; a participação em cursos depende de acordos formalizados.
-            </p>
           </div>
         </section>
 
@@ -301,7 +272,7 @@ function Home() {
               <PartnerCard icon={<Globe2 />} title="Instituições internacionais" text="Possibilidade de integrar formação especializada de parceiros estrangeiros." />
               <PartnerCard icon={<Users />} title="Empresas e organizações" text="Turmas fechadas e inscrição de colaboradores em grupo." />
             </div>
-            <p className="lcd-demo-disclaimer">Nesta versão de demonstração, as instituições apresentadas são exemplos de estrutura e não representam parcerias já anunciadas.</p>
+            <p className="lcd-demo-disclaimer">Os logótipos apresentados no topo são referências para integração e parceria no protótipo e não representam, por si só, parcerias já anunciadas.</p>
           </div>
         </section>
 
